@@ -42,20 +42,37 @@ if __name__ == '__main__':
     os.chdir(cwd)
 
     if "vpc" in subject_name:
-        subprocess.call(['python3', 'nest-video-cropping.py', subject_name, str(subDate)])
-        date2 = str(subDate).replace("/", "")
-        date2 = date2.replace("-", "_")
+        subprocess.call(['python3', 'video-cropping.py', subject_name, str(subDate)])
+        PATH_TO_DATA = '/Users/werchd01/Documents/VPC_Subjects/'
+        PATH_TO_OWLET = "/Users/werchd01/Documents/GitHub/OWLET/"
+        PATH_TO_TASKS = "/Users/werchd01/Documents/GitHub/OWLET-preprocessing/MICE_baseline_tasks/"
 
-        subDir = Path('/Users/werchd01/Documents/NEST_Subjects/' + subject_name + "/" + str(subDate))
-        os.chdir("/Users/werchd01/Documents/GitHub/OWLET/")
-        sub_id = str(subject_name).replace("nest_", "")
+        subDir = Path(PATH_TO_DATA + subject_name)
+        os.chdir(PATH_TO_OWLET)
+        sub_id = str(subject_name).replace("vpc_", "")
 
-        vid1 = "/Users/werchd01/Documents/NEST_Subjects/" + subject_name + "/" + str(subDate) + sub_id + "_" + date2 + ".mp4" 
+        vid1 = PATH_TO_DATA + "baseline/" + subject_name + "/" + sub_id + "_cecile1.mp4"
+        vid2 = PATH_TO_DATA + "baseline/" + subject_name + "/" + sub_id + "_vpc_baseline.mp4"
+        vid3 = PATH_TO_DATA + "test/" + subject_name + "/" + sub_id + "_cecile2.mp4"
+        vid4 = PATH_TO_DATA + "test/" + subject_name + "/" + sub_id + "_vpc_test.mp4"
+
+        owlet_command = PATH_TO_OWLET + 'OWLET.py'
+        vpc_baseline_path =  PATH_TO_TASKS + 'vpc_baseline'
+        vpc_test_path =  PATH_TO_TASKS + 'vpc_test'
+        cecile_path = PATH_TO_TASKS + 'cecile'
+
 
         try: 
-            subprocess.call(['python3', '/Users/werchd01/Documents/GitHub/OWLET/OWLET.py', "--subject_video", vid1, "--experiment_info", "/Users/werchd01/Documents/GitHub/OWLET-preprocessing/NEST_Tasks", "--override_audio_matching"])
+            subprocess.call(['python3', owlet_command, "--subject_video", vid1, "--experiment_info", cecile_path, "--override_audio_matching"])
+            subprocess.call(['python3', owlet_command, "--subject_video", vid2, "--experiment_info", vpc_baseline_path, "--override_audio_matching"])
+
         except:
-            print("No video")
+            try: 
+                subprocess.call(['python3', owlet_command, "--subject_video", vid3, "--experiment_info", cecile_path, "--override_audio_matching"])
+                subprocess.call(['python3', owlet_command, "--subject_video", vid4, "--experiment_info", vpc_test_path, "--override_audio_matching"])
+
+            except:
+                print("No video")
     
     else:
 

@@ -58,7 +58,10 @@ def firebase_download(participant_ID, date):
             source_blob_name1 = source_blobs[0]
             blob = bucket.blob(source_blob_name1)
             if blob.exists():
-                videofile1 = '/Users/werchd01/Documents/NEST_Subjects/' + participant_ID + '/' + date + sub_id + "_" + date2 + "." + fileExt
+                if "baseline" in subject_name:
+                    videofile1 = '/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + '/' + "baseline/" + sub_id + "_baseline." + fileExt
+                else:
+                    videofile1 = '/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + '/' + "test/" + sub_id + "_test." + fileExt
                 blob.download_to_filename(videofile1)
         except:
             # try:
@@ -76,10 +79,11 @@ def firebase_download(participant_ID, date):
 
       
         try:
-            source_blob_name = "NestStudy/" + participant_ID + '/' +   date + "survey-data.csv"
+            
+            source_blob_name = "VPC/" +  participant_ID + '/' +   date + "survey-data.csv"
             blob = bucket.blob(source_blob_name)
             if blob.exists():
-                surveyfile = '/Users/werchd01/Documents/NEST_Subjects/' + participant_ID + '/' + date + sub_id + "_survey_data_" + date2 + ".csv"
+                surveyfile = '/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + '/' + sub_id + "_survey_data.csv"
                 blob.download_to_filename(surveyfile)
         except:
             print()
@@ -113,7 +117,10 @@ def parse_arguments():
     
 def cut_calibration(videofile, filename, mystr):
         # mystr = "fps=30"
-        subprocess.call(["ffmpeg", "-y", "-ss", "00:00:02", "-to", "00:00:10", "-i", videofile, "-filter:v", mystr, "-r", "30", f"{filename}_calibration.mp4"], 
+    filename = filename.replace("_baseline", "")
+    filename = filename.replace("_test", "")
+
+    subprocess.call(["ffmpeg", "-y", "-ss", "00:00:02", "-to", "00:00:10", "-i", videofile, "-filter:v", mystr, "-r", "30", f"{filename}_calibration.mp4"], 
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.STDOUT)
         
@@ -122,6 +129,40 @@ def convert_to_mp4(videofile):
     subprocess.call(["ffmpeg", "-y", "-i", videofile,  "-r", "30", f"{filename}.mp4"], 
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.STDOUT)
+    
+def crop_familiarization(videofile, mystr):
+    original_dir = Path(videofile).parent.resolve()
+    filename, ext = os.path.splitext(videofile)
+    if fileExt == 'webm':
+        original_filename = filename + '_original.webm' 
+    else:
+        original_filename = filename + '_original.mp4'
+    original_file = os.path.join(original_dir, original_filename)
+    os.rename(videofile, original_file)
+    subprocess.call(["ffmpeg", "-y", "-ss", "00:00:10", "-to", "00:01:28", "-i", original_file, "-filter:v", mystr, "-r", "30", f"{filename}_cecile1.mp4"], 
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.STDOUT)   
+    subprocess.call(["ffmpeg", "-y", "-ss", "00:01:28", "-to", "00:01:58", "-i", original_file, "-filter:v", mystr, "-r", "30", f"{filename}_vpc_baseline.mp4"], 
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.STDOUT)  
+    
+def crop_test(videofile, mystr):
+    original_dir = Path(videofile).parent.resolve()
+    filename, ext = os.path.splitext(videofile)
+    if fileExt == 'webm':
+        original_filename = filename + '_original.webm' 
+    else:
+        original_filename = filename + '_original.mp4'
+    original_file = os.path.join(original_dir, original_filename)
+    filename = filename.replace("_test", "")
+    subprocess.call(["ffmpeg", "-y", "-ss", "00:00:40", "-to", "00:01:28", "-i", original_file, "-filter:v", mystr, "-r", "30", f"{filename}_cecile2.mp4"], 
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.STDOUT)   
+    subprocess.call(["ffmpeg", "-y", "-ss", "00:00:10", "-to", "00:00:40", "-i", original_file, "-filter:v", mystr, "-r", "30", f"{filename}_vpc_test.mp4"], 
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.STDOUT)  
+
+
     
 def crop_video(videofile, mystr):
     original_dir = Path(videofile).parent.resolve()
@@ -181,13 +222,13 @@ if __name__ == '__main__':
     if videofile1 != '': vid = videofile1
 
 
-    filename, ext = os.path.splitext(vid)
-    if fileExt == "webm": convert_to_mp4(vid)
+    filename, ext = os.path.splitext(videofile1)
+    if fileExt == "webm": convert_to_mp4(videofile1)
 
     vid = filename + ".mp4"
-    print("VIDEO NAME IS ", vid)
+    print("VIDEO NAME IS ", videofile1)
 
-    cap = cv2.VideoCapture(vid) 
+    cap = cv2.VideoCapture(videofile1) 
 
     ret, frame = cap.read()
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -307,8 +348,15 @@ if __name__ == '__main__':
     myDate = myDate.replace('-', "_")
     
     if videofile1 != '':
-        subject_name = subject_name.replace("nest_", "")
-        calibfilename = str(Path(videofile1).parent.resolve()) +  '/' + subject_name + "_" + myDate
+        subject_name = subject_name.replace("vpc_", "")
+        calibfilename = str(Path(videofile1).parent.resolve()) +  '/' + subject_name
         print(calibfilename, myDate)
         cut_calibration(videofile1, calibfilename, mystr)
-        crop_video(videofile1, mystr)
+    
+        if 'baseline' in videofile1:
+            crop_familiarization(videofile1, mystr)
+            # do something
+        else:
+            crop_test(videofile1, mystr)
+            #do something
+      
