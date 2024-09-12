@@ -42,7 +42,7 @@ def firebase_download(participant_ID, date):
     
     if doc.exists:
         subData = doc.to_dict()
-        Path('/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + "/" + date).mkdir(parents=True, exist_ok=True)
+        
         sub_id = str(participant_ID).replace("vpc_", "")
         date2 = str(date).replace("/", "")
         date2 = date2.replace('-', "_")
@@ -53,16 +53,22 @@ def firebase_download(participant_ID, date):
             print("No file extension in subject record. Defaulting to webm")
 
         try:
-            bucketname = "VPC/" + participant_ID 
-            source_blobs = bucket.list_blobs(prefix=bucketname)
-            source_blob_name1 = source_blobs[0]
-            blob = bucket.blob(source_blob_name1)
+            source_blob_name = "VPC/" + participant_ID  + '/' + date + "vpc_baseline." + fileExt
+
+            blob = bucket.blob(source_blob_name)
             if blob.exists():
-                if "baseline" in subject_name:
-                    videofile1 = '/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + '/' + "baseline/" + sub_id + "_baseline." + fileExt
-                else:
-                    videofile1 = '/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + '/' + "test/" + sub_id + "_test." + fileExt
+                Path('/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + "/" + "baseline").mkdir(parents=True, exist_ok=True)
+                videofile1 = '/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + '/' + "baseline/" + sub_id + "_baseline." + fileExt
                 blob.download_to_filename(videofile1)
+            else:
+                source_blob_name = "VPC/" + participant_ID  + '/' + date + "vpc_test." + fileExt
+                blob = bucket.blob(source_blob_name)
+                if blob.exists():
+                    Path('/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + "/" + "test").mkdir(parents=True, exist_ok=True)
+                    videofile1 = '/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + '/' + "test/" + sub_id + "_test." + fileExt
+                    blob.download_to_filename(videofile1)
+
+
         except:
             # try:
             #     fileExt = "mp4"
@@ -139,10 +145,11 @@ def crop_familiarization(videofile, mystr):
         original_filename = filename + '_original.mp4'
     original_file = os.path.join(original_dir, original_filename)
     os.rename(videofile, original_file)
-    subprocess.call(["ffmpeg", "-y", "-ss", "00:00:10", "-to", "00:01:28", "-i", original_file, "-filter:v", mystr, "-r", "30", f"{filename}_cecile1.mp4"], 
+    filename = filename.replace("_baseline", "")
+    subprocess.call(["ffmpeg", "-y", "-ss", "00:00:10", "-to", "00:01:28", "-i", original_file, "-filter:v", mystr, "-r", "30", f"{filename}_cecile.mp4"], 
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.STDOUT)   
-    subprocess.call(["ffmpeg", "-y", "-ss", "00:01:28", "-to", "00:01:58", "-i", original_file, "-filter:v", mystr, "-r", "30", f"{filename}_vpc_baseline.mp4"], 
+    subprocess.call(["ffmpeg", "-y", "-ss", "00:01:28",  "-i", original_file, "-filter:v", mystr, "-r", "30", f"{filename}_vpc_baseline.mp4"], 
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.STDOUT)  
     
@@ -155,7 +162,7 @@ def crop_test(videofile, mystr):
         original_filename = filename + '_original.mp4'
     original_file = os.path.join(original_dir, original_filename)
     filename = filename.replace("_test", "")
-    subprocess.call(["ffmpeg", "-y", "-ss", "00:00:40", "-to", "00:01:28", "-i", original_file, "-filter:v", mystr, "-r", "30", f"{filename}_cecile2.mp4"], 
+    subprocess.call(["ffmpeg", "-y", "-ss", "00:00:40", "-to", "00:01:28", "-i", original_file, "-filter:v", mystr, "-r", "30", f"{filename}_cecile.mp4"], 
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.STDOUT)   
     subprocess.call(["ffmpeg", "-y", "-ss", "00:00:10", "-to", "00:00:40", "-i", original_file, "-filter:v", mystr, "-r", "30", f"{filename}_vpc_test.mp4"], 
@@ -351,9 +358,12 @@ if __name__ == '__main__':
         subject_name = subject_name.replace("vpc_", "")
         calibfilename = str(Path(videofile1).parent.resolve()) +  '/' + subject_name
         print(calibfilename, myDate)
+        print('FILE IS ', videofile1)
         cut_calibration(videofile1, calibfilename, mystr)
     
         if 'baseline' in videofile1:
+            print('FILE IS ', videofile1)
+
             crop_familiarization(videofile1, mystr)
             # do something
         else:
