@@ -67,13 +67,13 @@ if __name__ == '__main__':
             
             subprocess.call(['python3', owlet_command, "--subject_video", vid2, "--experiment_info", vpc_baseline_path, "--override_audio_matching"])
 
-        except:
-            try: 
-                subprocess.call(['python3', owlet_command, "--subject_video", vid3, "--experiment_info", cecile_path, "--override_audio_matching"])
-                subprocess.call(['python3', owlet_command, "--subject_video", vid4, "--experiment_info", vpc_test_path, "--override_audio_matching"])
+        # except:
+        #     try: 
+                # subprocess.call(['python3', owlet_command, "--subject_video", vid3, "--experiment_info", cecile_path, "--override_audio_matching"])
+                # subprocess.call(['python3', owlet_command, "--subject_video", vid4, "--experiment_info", vpc_test_path, "--override_audio_matching"])
 
-            except:
-                print("No video")
+        except:
+            print("No video")
     
     else:
 
