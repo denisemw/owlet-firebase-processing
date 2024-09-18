@@ -51,21 +51,17 @@ if __name__ == '__main__':
     sub_id = str(subject_name).replace("orca_", "")
 
     vid1 = PATH_TO_DATA + subject_name + "/" + sub_id + "_JRAttention.mp4"
-    vid2 = PATH_TO_DATA + subject_name  + "/" + sub_id + "_VPC8.mp4"
+    vid2 = PATH_TO_DATA + subject_name  + "/" + sub_id + "_VPC.mp4"
     vid3 = PATH_TO_DATA + subject_name  + "/" + sub_id + "_ProceduralMemory.mp4"
     vid4 = PATH_TO_DATA + subject_name + "/" + sub_id  + "_Cecile.mp4"
     vid5 = PATH_TO_DATA + subject_name  + "/" + sub_id + "_RelationalMemory.mp4"
-    vid6 = PATH_TO_DATA + subject_name + "/" + sub_id  + "_FreeviewAttn.mp4"
-    vid7 = PATH_TO_DATA + subject_name  + "/" + sub_id + "_SocialGeo.mp4"
 
     owlet_command = PATH_TO_OWLET + 'OWLET.py'
     jrattn_path = PATH_TO_TASKS + 'JRAttention'
-    vpc_path =  PATH_TO_TASKS + 'VPC8'
+    vpc_path =  PATH_TO_TASKS + 'VPC'
     proc_path =  PATH_TO_TASKS + 'ProceduralMemory'
     cecile_path = PATH_TO_TASKS + 'Cecile'
     rel_path =  PATH_TO_TASKS + 'RelationalMemory'
-    freeview_path =  PATH_TO_TASKS + 'FreeviewAttn'
-    socialgeo_path =  PATH_TO_TASKS + 'SocialGeo'
 
     try: 
         subprocess.call(['python3', owlet_command, "--subject_video", vid1, "--experiment_info", jrattn_path, "--override_audio_matching"])
@@ -87,11 +83,4 @@ if __name__ == '__main__':
         subprocess.call(['python3', owlet_command, "--subject_video", vid5, "--experiment_info", rel_path, "--override_audio_matching"])
     except:
         print("No RelationalMemory video")
-    try:
-        subprocess.call(['python3', owlet_command, "--subject_video", vid6, "--experiment_info", freeview_path, "--override_audio_matching"])
-    except:
-        print("No RelationalMemory video")
-    try:
-        subprocess.call(['python3', owlet_command, "--subject_video", vid7, "--experiment_info", socialgeo_path, "--override_audio_matching"])
-    except:
-        print("No RelationalMemory video")
+

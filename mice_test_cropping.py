@@ -27,107 +27,72 @@ fileExt = 'webm'
 
 
 videofile1 = ''
-videofile2 = ''
-videofile3 = ''
-videofile4 = ''
-videofile5 = ''
+
 aspectRatio = 1.77
 
 def firebase_download(participant_ID, date):
-    global fileExt, videofile1, videofile2, videofile3, videofile4, videofile5
+    global fileExt, videofile1
     
 
     doc_ref = db.collection("subjects").document(participant_ID)
 
     doc = doc_ref.get()
-    bucket_name = "xxxxxxxxx.appspot.com"
     bucket = storage.bucket()
     # print(bucket)
     
     if doc.exists:
         subData = doc.to_dict()
-        Path('/Users/werchd01/Documents/ORCA_Subjects/' + participant_ID).mkdir(parents=True, exist_ok=True)
-        sub_id = str(participant_ID).replace("orca_", "")
         
+        sub_id = str(participant_ID).replace("vpc_", "")
+        date2 = str(date).replace("/", "")
+        date2 = date2.replace('-', "_")
         try:
             fileExt = subData['extension']
-            print(fileExt)
-            print(subData['extension'])
+
         except:
             print("No file extension in subject record. Defaulting to webm")
 
         try:
-            source_blob_name = participant_ID + '/' + date + "ORCA_Video1." + fileExt
-            print(source_blob_name)
+            source_blob_name = "VPC/" + participant_ID  + '/' + date + "vpc_baseline." + fileExt
+
             blob = bucket.blob(source_blob_name)
             if blob.exists():
-                videofile1 = '/Users/werchd01/Documents/ORCA_Subjects/' + participant_ID + '/' + sub_id + "_JRAttention." + fileExt
+                Path('/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + "/" + "baseline").mkdir(parents=True, exist_ok=True)
+                videofile1 = '/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + '/' + "baseline/" + sub_id + "_baseline_visit." + fileExt
                 blob.download_to_filename(videofile1)
+            # else:
+            #     source_blob_name = "VPC/" + participant_ID  + '/' + date + "vpc_test." + fileExt
+            #     blob = bucket.blob(source_blob_name)
+            # #     if blob.exists():
+            #     Path('/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + "/" + "test").mkdir(parents=True, exist_ok=True)
+            #     videofile1 = '/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + '/' + "test/" + sub_id + "_test." + fileExt
+            #     blob.download_to_filename(videofile1)
+
+
         except:
-            print(participant_ID + date + '/' + "ORCA_JRAttention" + fileExt + " does not exist!")
+            # try:
+            #     fileExt = "mp4"
+            #     source_blob_name = "NestStudy/" + participant_ID + '/' + date + "NestStudy_Video1.mp4"
+            #     print(source_blob_name)
+            #     blob = bucket.blob(source_blob_name)
+            #     if blob.exists():
+            #         videofile1 = '/Users/werchd01/Documents/NEST_Subjects/' + participant_ID + '/' + date + sub_id + "_Video1_" + date2 + ".mp4" 
+            #         blob.download_to_filename(videofile1)
+            # except:
+
+            print(participant_ID + date + '/' + "Baseline Video" + fileExt + " does not exist!")
             videofile1 = ''
 
+      
         try:
-            source_blob_name = participant_ID + '/' +  date + "ORCA_Video2." + fileExt
-            blob = bucket.blob(source_blob_name)
-            if blob.exists():
-                videofile2 = '/Users/werchd01/Documents/ORCA_Subjects/' + participant_ID + '/' + sub_id + "_VPC." + fileExt
-                blob.download_to_filename(videofile2)
-        except:
-            print(participant_ID +  '/' + date +  "ORCA_VPC" + " does not exist!")
-            videofile2 = ''
+            videofile1 = '/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + '/' + "baseline/" + sub_id + "_baseline_visit." + fileExt
 
-        try:
-            source_blob_name = participant_ID + '/' +  date + "ORCA_Video3." + fileExt
-            blob = bucket.blob(source_blob_name)
-            if blob.exists():
-                videofile3 = '/Users/werchd01/Documents/ORCA_Subjects/' + participant_ID + '/' + sub_id + "_ProceduralMemory." + fileExt
-                blob.download_to_filename(videofile3)
-        except:
-            print(participant_ID +  '/' + date +  "ORCA_ProceduralMemory" + " does not exist!")
-            videofile3 = ''
-
-        try:
-            source_blob_name = participant_ID + '/' +  date + "ORCA_Video4." + fileExt
-            blob = bucket.blob(source_blob_name)
-            if blob.exists():
-                
-                videofile4 = '/Users/werchd01/Documents/ORCA_Subjects/' + participant_ID + '/' + sub_id + "_Cecile." + fileExt
-                blob.download_to_filename(videofile4)
-        except:
-            print(participant_ID +  '/' + date + "ORCA_Cecile" + " does not exist!")
-            videofile4 = ''
-
-        try:
-            source_blob_name = participant_ID + '/' +   date + "ORCA_Video5." + fileExt
-            blob = bucket.blob(source_blob_name)
-            if blob.exists():
-                videofile5 = '/Users/werchd01/Documents/ORCA_Subjects/' + participant_ID + '/' + sub_id + "_RelationalMemory." + fileExt
-                blob.download_to_filename(videofile5)
-        except:
-            print(participant_ID +   '/' + date +  "ORCA_RelationalMemory" + " does not exist!")
-            videofile5 = ''
-        try:
             source_blob_name = participant_ID + '/' +   date + "survey-data.csv"
             blob = bucket.blob(source_blob_name)
             if blob.exists():
-                surveyfile = '/Users/werchd01/Documents/ORCA_Subjects/' + participant_ID + '/' + sub_id + "_survey_data.csv"
+                Path('/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + "/" + "SurveyData").mkdir(parents=True, exist_ok=True)
+                surveyfile = '/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + '/SurveyData/' + sub_id + '_' + date + "_survey_data.csv"
                 blob.download_to_filename(surveyfile)
-        except:
-            print()
-        try:
-            source_blob_name = participant_ID + '/' +   date + participant_ID + "_video-times.csv"
-            blob = bucket.blob(source_blob_name)
-            if blob.exists():
-                surveyfile = '/Users/werchd01/Documents/ORCA_Subjects/' + participant_ID + '/' + sub_id + "_video-times.csv"
-                blob.download_to_filename(surveyfile)
-            else:
-                source_blob_name = participant_ID + '/' +   date  + "video-times.csv"
-                blob = bucket.blob(source_blob_name)
-                if blob.exists():
-                    surveyfile = '/Users/werchd01/Documents/ORCA_Subjects/' + participant_ID + '/' + sub_id + "_video-times.csv"
-                    blob.download_to_filename(surveyfile)
-
         except:
             print()
 
@@ -136,14 +101,8 @@ def firebase_download(participant_ID, date):
         
 
 def subName(value):
-    # if not (value.endswith('.mp4') or value.endswith('.mov') or value.endswith('.m4v')):
-    #     raise argparse.ArgumentTypeError(
-    #         'video file must be of type *.mp4, *.mov, or *.m4v')
     return value
 def date(value):
-    # if not (value.endswith('.mp4') or value.endswith('.mov') or value.endswith('.m4v')):
-    #     raise argparse.ArgumentTypeError(
-    #         'video file must be of type *.mp4, *.mov, or *.m4v')
     return value
 
 def parse_arguments():
@@ -155,13 +114,13 @@ def parse_arguments():
     args = parser.parse_args()
     
     return args
-
-
     
 def cut_calibration(videofile, filename, mystr):
         # mystr = "fps=30"
-        print("calibration", videofile)
-        subprocess.call(["ffmpeg", "-y", "-ss", "00:00:02", "-to", "00:00:17", "-i", videofile, "-filter:v", mystr, "-r", "30", f"{filename}_calibration.mp4"], 
+    filename = filename.replace("_baseline", "")
+    filename = filename.replace("_test", "")
+
+    subprocess.call(["ffmpeg", "-y", "-ss", "00:00:02", "-to", "00:00:10", "-i", videofile, "-filter:v", mystr, "-r", "30", f"{filename}_calibration.mp4"], 
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.STDOUT)
         
@@ -171,7 +130,7 @@ def convert_to_mp4(videofile):
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.STDOUT)
     
-def crop_video(videofile, mystr):
+def crop_test(videofile, mystr):
     original_dir = Path(videofile).parent.resolve()
     filename, ext = os.path.splitext(videofile)
     if fileExt == 'webm':
@@ -180,9 +139,19 @@ def crop_video(videofile, mystr):
         original_filename = filename + '_original.mp4'
     original_file = os.path.join(original_dir, original_filename)
     os.rename(videofile, original_file)
-    subprocess.call(["ffmpeg", "-y", "-i", original_file, "-filter:v", mystr, "-r", "30", f"{filename}.mp4"], 
+    filename = filename.replace("_test", "")    
+    
+    subprocess.call(["ffmpeg", "-y", "-ss", "00:00:10", "-to", "00:00:40", "-i", original_file, "-filter:v", mystr, "-r", "30", f"{filename}_vpc_test.mp4"], 
                 stdout=subprocess.DEVNULL,
-                stderr=subprocess.STDOUT)
+                stderr=subprocess.STDOUT)  
+    subprocess.call(["ffmpeg", "-y", "-ss", "00:00:40", "-i", original_file, "-filter:v", mystr, "-r", "30", f"{filename}_cecile.mp4"], 
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.STDOUT)   
+
+    if fileExt == 'webm':
+        convert_to_mp4(original_file)
+        os.remove(original_file)
+
         
 def convert_to_landscape(videofile, vidAspectRatio):
 
@@ -227,18 +196,15 @@ if __name__ == '__main__':
 
     face_detector = dlib.get_frontal_face_detector()
     if videofile1 != '': vid = videofile1
-    elif videofile2 != '': vid = videofile2
-    elif videofile3 != '': vid = videofile3
-    elif videofile4 != '': vid = videofile4
-    else: vid = videofile5
 
-    filename, ext = os.path.splitext(vid)
-    if fileExt == "webm": convert_to_mp4(vid)
+
+    filename, ext = os.path.splitext(videofile1)
+    if fileExt == "webm": convert_to_mp4(videofile1)
 
     vid = filename + ".mp4"
-    print("VIDEO NAME IS ", vid)
+    print("VIDEO NAME IS ", videofile1)
 
-    cap = cv2.VideoCapture(vid) 
+    cap = cv2.VideoCapture(videofile1) 
 
     ret, frame = cap.read()
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -248,10 +214,7 @@ if __name__ == '__main__':
     cap.release()
 
     if videofile1 != '': videofile1 = convert_to_landscape(videofile1, aspectRatio)
-    if videofile2 != '': videofile2 = convert_to_landscape(videofile2, aspectRatio)
-    if videofile3 != '': videofile3 = convert_to_landscape(videofile3, aspectRatio)
-    if videofile4 != '': videofile4 = convert_to_landscape(videofile4, aspectRatio)
-    if videofile5 != '': videofile5 = convert_to_landscape(videofile5, aspectRatio)
+
     
 
     found_face = 0
@@ -356,36 +319,15 @@ if __name__ == '__main__':
         h = int(sum(xList2)/len(xList2)) - y
 
     mystr = "crop=%s:%s:%s:%s" % (w, h, x, y)
+    myDate = str(subDate)
+    myDate = myDate.replace("/", "")
+    myDate = myDate.replace('-', "_")
+    
     if videofile1 != '':
-        subject_name = subject_name.replace("orca_", "")
+        subject_name = subject_name.replace("vpc_", "")
         calibfilename = str(Path(videofile1).parent.resolve()) +  '/' + subject_name
-        print(calibfilename)
+
         cut_calibration(videofile1, calibfilename, mystr)
-        crop_video(videofile1, mystr)
-        
-    if videofile2 != '': crop_video(videofile2, mystr)
-    if videofile3 != '': crop_video(videofile3, mystr)
-    if videofile4 != '': crop_video(videofile4, mystr)
-    if videofile5 != '': crop_video(videofile5, mystr)
     
-    
-#     filename, ext = os.path.splitext(videofile)
-
-
-    
-    
-#     # print(ff_start, ff_end, mystr, videofile, filename)
-    
-#     subprocess.call(["ffmpeg", "-ss", "00:00:02", "-to", "00:00:15", "-i", videofile, "-filter:v", mystr, f"{filename}_calibration.mp4"], 
-#             stdout=subprocess.DEVNULL,
-#             stderr=subprocess.STDOUT)
-
-
-        
-    # subprocess.call(["ffmpeg", "-ss", ff_end, "-i", videofile, "-filter:v", mystr, f"{filename}_tasks.mp4"], 
-    #             stdout=subprocess.DEVNULL,
-    #             stderr=subprocess.STDOUT)
-    
-#     subprocess.call(["ffmpeg", "-i", videofile, "-filter:v", mystr, f"{filename}_cropped.mp4"], 
-#                 stdout=subprocess.DEVNULL,
-#                 stderr=subprocess.STDOUT)
+        crop_test(videofile1, mystr)
+      

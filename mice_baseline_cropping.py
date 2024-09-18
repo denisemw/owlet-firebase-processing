@@ -53,12 +53,12 @@ def firebase_download(participant_ID, date):
             print("No file extension in subject record. Defaulting to webm")
 
         try:
-            source_blob_name = "VPC/" + participant_ID  + '/' + date + "vpc_test." + fileExt
+            source_blob_name = "VPC/" + participant_ID  + '/' + date + "vpc_baseline." + fileExt
 
             blob = bucket.blob(source_blob_name)
             if blob.exists():
                 Path('/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + "/" + "baseline").mkdir(parents=True, exist_ok=True)
-                videofile1 = '/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + '/' + "baseline/" + sub_id + "_baseline." + fileExt
+                videofile1 = '/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + '/' + "baseline/" + sub_id + "_baseline_visit." + fileExt
                 blob.download_to_filename(videofile1)
             # else:
             #     source_blob_name = "VPC/" + participant_ID  + '/' + date + "vpc_test." + fileExt
@@ -80,16 +80,18 @@ def firebase_download(participant_ID, date):
             #         blob.download_to_filename(videofile1)
             # except:
 
-            print(participant_ID + date + '/' + "Nest Video1" + fileExt + " does not exist!")
+            print(participant_ID + date + '/' + "Baseline Video" + fileExt + " does not exist!")
             videofile1 = ''
 
       
         try:
-            
+            videofile1 = '/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + '/' + "baseline/" + sub_id + "_baseline_visit." + fileExt
+
             source_blob_name = participant_ID + '/' +   date + "survey-data.csv"
             blob = bucket.blob(source_blob_name)
             if blob.exists():
-                surveyfile = '/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + '/' + sub_id + "_survey_data.csv"
+                Path('/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + "/" + "SurveyData").mkdir(parents=True, exist_ok=True)
+                surveyfile = '/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + '/SurveyData/' + sub_id + '_' + date + "_survey_data.csv"
                 blob.download_to_filename(surveyfile)
         except:
             print()
@@ -99,14 +101,9 @@ def firebase_download(participant_ID, date):
         
 
 def subName(value):
-    # if not (value.endswith('.mp4') or value.endswith('.mov') or value.endswith('.m4v')):
-    #     raise argparse.ArgumentTypeError(
-    #         'video file must be of type *.mp4, *.mov, or *.m4v')
     return value
+
 def date(value):
-    # if not (value.endswith('.mp4') or value.endswith('.mov') or value.endswith('.m4v')):
-    #     raise argparse.ArgumentTypeError(
-    #         'video file must be of type *.mp4, *.mov, or *.m4v')
     return value
 
 def parse_arguments():
@@ -152,42 +149,10 @@ def crop_familiarization(videofile, mystr):
     subprocess.call(["ffmpeg", "-y", "-ss", "00:01:28",  "-i", original_file, "-filter:v", mystr, "-r", "30", f"{filename}_vpc_baseline.mp4"], 
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.STDOUT)  
-    
-def crop_test(videofile, mystr):
-    original_dir = Path(videofile).parent.resolve()
-    filename, ext = os.path.splitext(videofile)
+
     if fileExt == 'webm':
-        original_filename = filename + '_original.webm' 
-    else:
-        original_filename = filename + '_original.mp4'
-    original_file = os.path.join(original_dir, original_filename)
-    os.rename(videofile, original_file)
-    filename = filename.replace("_test", "")    
-    
-    print('ORIGINAL FILE IS ', original_file)
-    print('FILENAME IS ', filename)
-    subprocess.call(["ffmpeg", "-y", "-ss", "00:00:10", "-to", "00:00:40", "-i", original_file, "-filter:v", mystr, "-r", "30", f"{filename}_vpc_test.mp4"], 
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.STDOUT)  
-    subprocess.call(["ffmpeg", "-y", "-ss", "00:00:40", "-i", original_file, "-filter:v", mystr, "-r", "30", f"{filename}_cecile.mp4"], 
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.STDOUT)   
-
-
-
-    
-def crop_video(videofile, mystr):
-    original_dir = Path(videofile).parent.resolve()
-    filename, ext = os.path.splitext(videofile)
-    if fileExt == 'webm':
-        original_filename = filename + '_original.webm' 
-    else:
-        original_filename = filename + '_original.mp4'
-    original_file = os.path.join(original_dir, original_filename)
-    os.rename(videofile, original_file)
-    subprocess.call(["ffmpeg", "-y", "-i", original_file, "-filter:v", mystr, "-r", "30", f"{filename}.mp4"], 
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.STDOUT)
+        convert_to_mp4(original_file)
+        os.remove(original_file)
         
 def convert_to_landscape(videofile, vidAspectRatio):
 
