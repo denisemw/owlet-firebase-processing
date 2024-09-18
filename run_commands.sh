@@ -80,7 +80,7 @@ python process_orca_8m_data.py orca_247 2024-09-17
 python process_orca_8m_data.py orca_248 2024-09-15
 python process_orca_8m_data.py orca_250 2024-09-13
 
-mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*ProceduralMemory* /Users/werchd01/Documents/ORCA_8m/ProceduralMemory8m
+mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*ProceduralMemory* /Users/werchd01/Documents/ORCA_8m/ProcMem
 mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*Cecile* /Users/werchd01/Documents/ORCA_8m/Freeviewing
 mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*FreeviewAttn* /Users/werchd01/Documents/ORCA_8m/Freeviewing
 mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*JRAttention* /Users/werchd01/Documents/ORCA_8m/Freeviewing
