@@ -53,12 +53,12 @@ def firebase_download(participant_ID, date):
             print("No file extension in subject record. Defaulting to webm")
 
         try:
-            source_blob_name = "VPC/" + participant_ID  + '/' + date + "vpc_baseline." + fileExt
+            source_blob_name = "VPC/" + participant_ID  + '/' + date + "vpc_test." + fileExt
 
             blob = bucket.blob(source_blob_name)
             if blob.exists():
-                Path('/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + "/" + "baseline").mkdir(parents=True, exist_ok=True)
-                videofile1 = '/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + '/' + "baseline/" + sub_id + "_baseline_visit." + fileExt
+                Path('/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + "/" + "visit2").mkdir(parents=True, exist_ok=True)
+                videofile1 = '/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + '/' + "visit2/" + sub_id + "_test." + fileExt
                 blob.download_to_filename(videofile1)
             # else:
             #     source_blob_name = "VPC/" + participant_ID  + '/' + date + "vpc_test." + fileExt
@@ -80,13 +80,11 @@ def firebase_download(participant_ID, date):
             #         blob.download_to_filename(videofile1)
             # except:
 
-            print(participant_ID + date + '/' + "Baseline Video" + fileExt + " does not exist!")
+            print(participant_ID + date + '/' + "Test Video" + fileExt + " does not exist!")
             videofile1 = ''
 
       
         try:
-            videofile1 = '/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + '/' + "baseline/" + sub_id + "_baseline_visit." + fileExt
-
             source_blob_name = participant_ID + '/' +   date + "survey-data.csv"
             blob = bucket.blob(source_blob_name)
             if blob.exists():
@@ -117,6 +115,8 @@ def parse_arguments():
     
 def cut_calibration(videofile, filename, mystr):
         # mystr = "fps=30"
+    print(filename)
+    print(videofile)
     filename = filename.replace("_baseline", "")
     filename = filename.replace("_test", "")
 
