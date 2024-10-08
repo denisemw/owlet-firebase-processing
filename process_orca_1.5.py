@@ -41,28 +41,37 @@ if __name__ == '__main__':
 
     os.chdir(cwd)
 
-    subprocess.call(['python3', 'mice_test_cropping.py', subject_name, str(subDate)])
-    PATH_TO_DATA = '/Users/werchd01/Documents/VPC_Subjects/'
+    subprocess.call(['python3', 'orca_1.5_cropping.py', subject_name, str(subDate)])
+    PATH_TO_DATA = '/Users/werchd01/Documents/ORCA_1.5_Subjects/'
     PATH_TO_OWLET = "/Users/werchd01/Documents/GitHub/OWLET/"
-    PATH_TO_TASKS = "/Users/werchd01/Documents/GitHub/OWLET-preprocessing/MICE_baseline_tasks/"
+    PATH_TO_TASKS = "/Users/werchd01/Documents/GitHub/OWLET-preprocessing/ORCA_1.5_Tasks/"
 
     subDir = Path(PATH_TO_DATA + subject_name)
     os.chdir(PATH_TO_OWLET)
-    sub_id = str(subject_name).replace("vpc_", "")
+    sub_id = str(subject_name) #.replace("orca_1.5_", "")
 
-    vid3 = PATH_TO_DATA + subject_name + "/" + "visit2" + "/" + sub_id + "_cecile.mp4"
-    vid4 = PATH_TO_DATA + subject_name + "/" + "visit2"  + "/" + sub_id + "_vpc_test.mp4"
+    vid1 = PATH_TO_DATA + subject_name + "/" + sub_id  + "_Cecile.mp4"
+    vid2 = PATH_TO_DATA + subject_name  + "/" + sub_id + "_ProceduralMemory.mp4"
+    vid3 = PATH_TO_DATA + subject_name  + "/" + sub_id + "_AttentionNoise.mp4"
 
     owlet_command = PATH_TO_OWLET + 'OWLET.py'
-    vpc_test_path =  PATH_TO_TASKS + 'vpc_test'
+    proc_path =  PATH_TO_TASKS + 'ProceduralMemory'
     cecile_path = PATH_TO_TASKS + 'Cecile'
+    attn_noise_path =  PATH_TO_TASKS + 'AttentionNoise'
 
-    try: 
-        subprocess.call(['python3', owlet_command, "--subject_video", vid3, "--experiment_info", cecile_path, "--override_audio_matching"])
-        
-        subprocess.call(['python3', owlet_command, "--subject_video", vid4, "--experiment_info", vpc_test_path, "--override_audio_matching"])
 
+    try:
+        subprocess.call(['python3', owlet_command, "--subject_video", vid1, "--experiment_info", cecile_path, "--override_audio_matching"])
     except:
-        print("No video")
-    
+        print("No Cecile video")
+
+    try:
+        subprocess.call(['python3', owlet_command, "--subject_video", vid2, "--experiment_info", proc_path, "--override_audio_matching"])
+    except:
+        print("No Procedural Memory video")
+
+    try:
+        subprocess.call(['python3', owlet_command, "--subject_video", vid3, "--experiment_info", attn_noise_path, "--override_audio_matching"])
+    except:
+        print("No AttentionNoise video")
 

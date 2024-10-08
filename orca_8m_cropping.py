@@ -112,7 +112,7 @@ def firebase_download(participant_ID, date):
             source_blob_name = participant_ID + '/' +   date + "survey-data.csv"
             blob = bucket.blob(source_blob_name)
             if blob.exists():
-                surveyfile = '/Users/werchd01/Documents/ORCA_Subjects/' + participant_ID + '/8_month/' + sub_id + "_survey_data.csv"
+                surveyfile = '/Users/werchd01/Documents/ORCA_Subjects/' + participant_ID + '/8_month/' + sub_id + "_8m_survey_data.csv"
                 blob.download_to_filename(surveyfile)
         except:
             print()
@@ -121,13 +121,13 @@ def firebase_download(participant_ID, date):
             source_blob_name = participant_ID + '/' +   date + participant_ID + "_video-times.csv"
             blob = bucket.blob(source_blob_name)
             if blob.exists():
-                surveyfile = '/Users/werchd01/Documents/ORCA_Subjects/' + participant_ID + '/8_month/' + sub_id + "_video-times.csv"
+                surveyfile = '/Users/werchd01/Documents/ORCA_Subjects/' + participant_ID + '/8_month/' + sub_id + "_8m_video-times.csv"
                 blob.download_to_filename(surveyfile)
             else:
                 source_blob_name = participant_ID + '/' +   date  + "video-times.csv"
                 blob = bucket.blob(source_blob_name)
                 if blob.exists():
-                    surveyfile = '/Users/werchd01/Documents/ORCA_Subjects/' + participant_ID + '/8_month/' + sub_id + "_video-times.csv"
+                    surveyfile = '/Users/werchd01/Documents/ORCA_Subjects/' + participant_ID + '/8_month/' + sub_id + "_8m_video-times.csv"
                     blob.download_to_filename(surveyfile)
 
         except:

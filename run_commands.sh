@@ -54,10 +54,13 @@
 # python process_mice_baseline.py vpc_026 2024-09-10
 # python process_mice_baseline.py vpc_028 2024-09-12
 # python process_mice_baseline.py vpc_029 2024-09-16
+# python process_mice_baseline.py vpc_020 2024-09-24
+# python process_mice_baseline.py vpc_030 2024-09-27
 
 # mv /Users/werchd01/Documents/VPC_Subjects/*/baseline/*cecile* /Users/werchd01/Documents/VPC_Subjects/Cecile_Visit1
 # mv /Users/werchd01/Documents/VPC_Subjects/*/baseline/*vpc_baseline* /Users/werchd01/Documents/VPC_Subjects/VPCBaseline
-# mv /Users/werchd01/Documents/VPC_Subjects/*/baseline/*vpc_test* /Users/werchd01/Documents/VPC_Subjects/VPCBaseline
+# mv  /Users/werchd01/Documents/VPC_Subjects/*/SurveyData/*survey_* /Users/werchd01/Documents/OWLET_Website_SurveyData
+
 ###### END MICE BASELINE ###### 
 
 
@@ -76,16 +79,27 @@
 # python process_mice_test.py vpc_011 2024-08-30
 # python process_mice_test.py vpc_015 2024-08-23
 # python process_mice_test.py vpc_020 2024-09-25
-python process_mice_test.py vpc_023 2024-09-15
-python process_mice_test.py vpc_025 2024-09-13
-python process_mice_test.py vpc_026 2024-09-17
-python process_mice_test.py vpc_029 2024-09-17
+# python process_mice_test.py vpc_023 2024-09-15
+# python process_mice_test.py vpc_025 2024-09-13
+# python process_mice_test.py vpc_026 2024-09-17
+# python process_mice_test.py vpc_029 2024-09-17
+# python process_mice_test.py vpc_020 2024-09-25
+# python process_mice_test.py vpc_030 2024-10-04
+# python process_mice_test.py vpc_028 2024-09-13
+
+# python process_mice_test.py vpc_002 2024-08-02
+# python process_mice_test.py vpc_006 2024-08-16
+# python process_mice_test.py vpc_021 2024-09-06
+# python process_mice_test.py vpc_022 2024-09-12
+# python process_mice_test.py vpc_024 2024-09-07
 
 
 
-# mv */test/*cecile* /Users/werchd01/Documents/VPC_Subjects/Cecile_Visit2
-# mv */test/*vpc_test* /Users/werchd01/Documents/VPC_Subjects/VPCTest
-###### END MICE TEST ###### 
+# mv /Users/werchd01/Documents/VPC_Subjects/*/visit2/*cecile* /Users/werchd01/Documents/VPC_Subjects/Cecile_Visit2
+# mv /Users/werchd01/Documents/VPC_Subjects/*/visit2/*vpc_test* /Users/werchd01/Documents/VPC_Subjects/VPCTest
+# mv  /Users/werchd01/Documents/VPC_Subjects/*/SurveyData/*survey_* /Users/werchd01/Documents/OWLET_Website_SurveyData
+
+# ###### END MICE TEST ###### 
 
 
 
@@ -121,14 +135,40 @@ python process_mice_test.py vpc_029 2024-09-17
 # python process_orca_8m.py orca_248 2024-09-15
 # python process_orca_8m.py orca_250 2024-09-13
 # python process_orca_8m.py orca_250 2024-09-13
+# python process_orca_8m.py orca_251 2024-09-18
+# python process_orca_8m.py orca_246 2024-09-19
+# python process_orca_8m.py orca_233 2024-09-19
+# python process_orca_8m.py orca_215 2024-09-20
+# python process_orca_8m.py orca_236 2024-09-20
+# python process_orca_8m.py orca_232 2024-09-20
+# python process_orca_8m.py orca_233 2024-09-19
+# python process_orca_8m.py orca_240 2024-09-23
+# python process_orca_8m.py orca_245 2024-09-23
+# python process_orca_8m.py orca_229 2024-09-24
+# python process_orca_8m.py orca_221 2024-09-25
+# python process_orca_8m.py orca_253 2024-10-04
+python process_orca_8m.py orca_255 2024-10-08
+python process_orca_8m.py orca_252 2024-10-08
 
-# mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*ProceduralMemory* /Users/werchd01/Documents/ORCA_8m/ProcMem
-# mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*Cecile* /Users/werchd01/Documents/ORCA_8m/Freeviewing
-# mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*FreeviewAttn* /Users/werchd01/Documents/ORCA_8m/Freeviewing
-# mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*JRAttention* /Users/werchd01/Documents/ORCA_8m/Freeviewing
-# mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*RelationalMemory* /Users/werchd01/Documents/ORCA_8m/RelMem
-# mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*VPC* /Users/werchd01/Documents/ORCA_8m/RecMem
-# mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*SocialGeo* /Users/werchd01/Documents/ORCA_8m/SocialAttn
+mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*ProceduralMemory* /Users/werchd01/Documents/ORCA_8m/ProcMem
+mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*Cecile* /Users/werchd01/Documents/ORCA_8m/Freeviewing
+mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*FreeviewAttn* /Users/werchd01/Documents/ORCA_8m/Freeviewing
+mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*JRAttention* /Users/werchd01/Documents/ORCA_8m/Freeviewing
+mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*RelationalMemory* /Users/werchd01/Documents/ORCA_8m/RelMem
+mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*VPC* /Users/werchd01/Documents/ORCA_8m/RecMem
+mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*SocialGeo* /Users/werchd01/Documents/ORCA_8m/SocialAttn
+mv  /Users/werchd01/Documents/*/*/*/*survey_* /Users/werchd01/Documents/OWLET_Website_SurveyData
 ###### END ORCA 8 MONTH VISIT ###### 
 
+# python process_orca_1.5.py orca_1.5_001 2024-09-23
 
+# python process_orca_1.5.py orca_1.5_002 2024-09-24
+# python process_orca_1.5.py orca_1.5_003 2024-09-24
+# python process_orca_1.5.py orca_1.5_008 2024-09-26
+# python process_orca_1.5.py orca_1.5_005 2024-09-26
+# python process_orca_1.5.py orca_1.5_007 2024-09-26
+# python process_orca_1.5.py orca_1.5_006 2024-09-27
+# python process_orca_1.5.py orca_1.5_009 2024-09-30
+python process_orca_4m.py orca_256 2024-08-07
+python process_orca_4m.py orca_296 2024-08-14
+python process_orca_4m.py orca_296 2024-08-14

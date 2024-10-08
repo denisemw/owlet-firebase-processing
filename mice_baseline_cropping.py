@@ -58,40 +58,24 @@ def firebase_download(participant_ID, date):
             blob = bucket.blob(source_blob_name)
             if blob.exists():
                 Path('/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + "/" + "baseline").mkdir(parents=True, exist_ok=True)
-                videofile1 = '/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + '/' + "baseline/" + sub_id + "_baseline_visit." + fileExt
+                videofile1 = '/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + '/' + "baseline/" + sub_id + "_baseline." + fileExt
                 blob.download_to_filename(videofile1)
-            # else:
-            #     source_blob_name = "VPC/" + participant_ID  + '/' + date + "vpc_test." + fileExt
-            #     blob = bucket.blob(source_blob_name)
-            # #     if blob.exists():
-            #     Path('/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + "/" + "test").mkdir(parents=True, exist_ok=True)
-            #     videofile1 = '/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + '/' + "test/" + sub_id + "_test." + fileExt
-            #     blob.download_to_filename(videofile1)
+     
 
 
         except:
-            # try:
-            #     fileExt = "mp4"
-            #     source_blob_name = "NestStudy/" + participant_ID + '/' + date + "NestStudy_Video1.mp4"
-            #     print(source_blob_name)
-            #     blob = bucket.blob(source_blob_name)
-            #     if blob.exists():
-            #         videofile1 = '/Users/werchd01/Documents/NEST_Subjects/' + participant_ID + '/' + date + sub_id + "_Video1_" + date2 + ".mp4" 
-            #         blob.download_to_filename(videofile1)
-            # except:
+
 
             print(participant_ID + date + '/' + "Baseline Video" + fileExt + " does not exist!")
             videofile1 = ''
 
       
         try:
-            videofile1 = '/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + '/' + "baseline/" + sub_id + "_baseline_visit." + fileExt
 
-            source_blob_name = participant_ID + '/' +   date + "survey-data.csv"
+            source_blob_name = "VPC/" + participant_ID  + '/' + date + "survey-data.csv"
             blob = bucket.blob(source_blob_name)
             if blob.exists():
-                Path('/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + "/" + "SurveyData").mkdir(parents=True, exist_ok=True)
-                surveyfile = '/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + '/SurveyData/' + sub_id + '_' + date + "_survey_data.csv"
+                surveyfile = '/Users/werchd01/Documents/VPC_Subjects/SurveyData/' + sub_id + "_visit1_survey_data.csv"
                 blob.download_to_filename(surveyfile)
         except:
             print()
@@ -121,7 +105,7 @@ def parse_arguments():
 def cut_calibration(videofile, filename, mystr):
         # mystr = "fps=30"
     filename = filename.replace("_baseline", "")
-    filename = filename.replace("_test", "")
+    # filename = filename.replace("_test", "")
 
     subprocess.call(["ffmpeg", "-y", "-ss", "00:00:02", "-to", "00:00:10", "-i", videofile, "-filter:v", mystr, "-r", "30", f"{filename}_calibration.mp4"], 
                 stdout=subprocess.DEVNULL,

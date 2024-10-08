@@ -85,11 +85,10 @@ def firebase_download(participant_ID, date):
 
       
         try:
-            source_blob_name = participant_ID + '/' +   date + "survey-data.csv"
+            source_blob_name = "VPC/" + participant_ID  + '/' + date + "survey-data.csv"
             blob = bucket.blob(source_blob_name)
             if blob.exists():
-                Path('/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + "/" + "SurveyData").mkdir(parents=True, exist_ok=True)
-                surveyfile = '/Users/werchd01/Documents/VPC_Subjects/' + participant_ID + '/SurveyData/' + sub_id + '_' + date + "_survey_data.csv"
+                surveyfile = '/Users/werchd01/Documents/VPC_Subjects/SurveyData/' + sub_id + "_visit2_survey_data.csv"
                 blob.download_to_filename(surveyfile)
         except:
             print()
