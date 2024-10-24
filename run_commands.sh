@@ -147,17 +147,21 @@
 # python process_orca_8m.py orca_229 2024-09-24
 # python process_orca_8m.py orca_221 2024-09-25
 # python process_orca_8m.py orca_253 2024-10-04
-python process_orca_8m.py orca_255 2024-10-08
-python process_orca_8m.py orca_252 2024-10-08
+# python process_orca_8m.py orca_255 2024-10-08
+# python process_orca_8m.py orca_252 2024-10-08
+# python process_orca_8m.py orca_254 2024-10-08
+# python process_orca_8m.py orca_263 2024-10-09
+# python process_orca_8m.py orca_260 2024-10-09
+# python process_orca_8m.py orca_261 2024-10-10
 
-mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*ProceduralMemory* /Users/werchd01/Documents/ORCA_8m/ProcMem
-mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*Cecile* /Users/werchd01/Documents/ORCA_8m/Freeviewing
-mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*FreeviewAttn* /Users/werchd01/Documents/ORCA_8m/Freeviewing
-mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*JRAttention* /Users/werchd01/Documents/ORCA_8m/Freeviewing
-mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*RelationalMemory* /Users/werchd01/Documents/ORCA_8m/RelMem
-mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*VPC* /Users/werchd01/Documents/ORCA_8m/RecMem
-mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*SocialGeo* /Users/werchd01/Documents/ORCA_8m/SocialAttn
-mv  /Users/werchd01/Documents/*/*/*/*survey_* /Users/werchd01/Documents/OWLET_Website_SurveyData
+# mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*ProceduralMemory* /Users/werchd01/Documents/ORCA_8m/ProcMem
+# mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*Cecile* /Users/werchd01/Documents/ORCA_8m/Freeviewing
+# mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*FreeviewAttn* /Users/werchd01/Documents/ORCA_8m/Freeviewing
+# mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*JRAttention* /Users/werchd01/Documents/ORCA_8m/Freeviewing
+# mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*RelationalMemory* /Users/werchd01/Documents/ORCA_8m/RelMem
+# mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*VPC* /Users/werchd01/Documents/ORCA_8m/RecMem
+# mv /Users/werchd01/Documents/ORCA_Subjects/*/8_month/*SocialGeo* /Users/werchd01/Documents/ORCA_8m/SocialAttn
+# mv  /Users/werchd01/Documents/*/*/*/*survey_* /Users/werchd01/Documents/OWLET_Website_SurveyData
 ###### END ORCA 8 MONTH VISIT ###### 
 
 # python process_orca_1.5.py orca_1.5_001 2024-09-23
@@ -169,6 +173,42 @@ mv  /Users/werchd01/Documents/*/*/*/*survey_* /Users/werchd01/Documents/OWLET_We
 # python process_orca_1.5.py orca_1.5_007 2024-09-26
 # python process_orca_1.5.py orca_1.5_006 2024-09-27
 # python process_orca_1.5.py orca_1.5_009 2024-09-30
-python process_orca_4m.py orca_256 2024-08-07
-python process_orca_4m.py orca_296 2024-08-14
-python process_orca_4m.py orca_296 2024-08-14
+
+
+# python process_orca_4m.py orca_256 2024-08-07
+# python process_orca_4m.py orca_296 2024-08-14
+# python process_orca_4m.py orca_300 2024-08-15
+# python process_orca_4m.py orca_299 2024-08-15
+# python process_orca_4m.py orca_293 2024-08-15
+# python process_orca_4m.py orca_298 2024-08-20
+# python process_orca_4m.py orca_290 2024-08-20
+# python process_orca_4m.py orca_292 2024-08-20
+python process_orca_4m.py orca_297 2024-08-22
+# python process_orca_4m.py orca_282 2024-08-26
+# python process_orca_4m.py orca_303 2024-08-28
+# python process_orca_4m.py orca_301 2024-09-04
+# python process_orca_4m.py orca_302 2024-09-04
+# python process_orca_4m.py orca_304 2024-09-05
+# python process_orca_4m.py orca_305 2024-09-06
+# python process_orca_4m.py orca_306 2024-09-10
+# python process_orca_4m.py orca_309 2024-09-11
+# python process_orca_4m.py orca_310 2024-09-12
+# python process_orca_4m.py orca_313 2024-09-16
+# python process_orca_4m.py orca_311 2024-09-16
+# python process_orca_4m.py orca_307 2024-09-19
+# python process_orca_4m.py orca_308 2024-09-19
+# python process_orca_4m.py orca_312 2024-09-27
+# python process_orca_4m.py orca_315 2024-09-30
+# python process_orca_4m.py orca_320 2024-10-08
+# python process_orca_4m.py orca_318 2024-10-09
+# python process_orca_4m.py orca_322 2024-10-11
+# python process_orca_4m.py orca_321 2024-10-14
+# python process_orca_4m.py orca_319 2024-10-17
+# python process_orca_4m.py orca_314 2024-10-17
+
+# mv /Users/werchd01/Documents/ORCA_Subjects/*/*ProceduralMemory* /Users/werchd01/Documents/ORCA_4m/ProcMem
+# mv /Users/werchd01/Documents/ORCA_Subjects/*/*Cecile* /Users/werchd01/Documents/ORCA_4m/Freeviewing
+# mv /Users/werchd01/Documents/ORCA_Subjects/*/*JRAttention* /Users/werchd01/Documents/ORCA_4m/Freeviewing
+# mv /Users/werchd01/Documents/ORCA_Subjects/*/*RelationalMemory* /Users/werchd01/Documents/ORCA_4m/RelMem
+# mv /Users/werchd01/Documents/ORCA_Subjects/*/*VPC* /Users/werchd01/Documents/ORCA_4m/RecMem
+# mv  /Users/werchd01/Documents/*/*/*/*survey_* /Users/werchd01/Documents/OWLET_Website_SurveyData

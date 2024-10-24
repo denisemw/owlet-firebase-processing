@@ -281,8 +281,10 @@ if __name__ == '__main__':
         ## if there are two faces detected, take the lower face
         if len(faces) > 1 and (faces[1].bottom() > faces[0].bottom()):
             face_index = 1
+            adult_index = 0
         else:
             face_index = 0
+            adult_index = 1
         if len(faces) > 0:
             startY = faces[face_index].top()
             endY = faces[face_index].bottom()
@@ -310,6 +312,20 @@ if __name__ == '__main__':
                     max_w = int(1.7777*max_h)
                 y = int(center_y - int(max_h/2))
                 h = int(center_y + int(max_h/2))
+
+
+                #### alter if an adult's face is detected
+                if len(faces) > 1:
+                    startY_adult = faces[adult_index].top()
+                    endY_adult = faces[adult_index].bottom()
+                    face_h_adult = endY_adult - startY_adult
+                    center_y_adult = startY_adult + (face_h_adult / 2)
+                    if h > center_y_adult:
+                        max_h = center_y_adult
+                        max_w = int(1.7777*max_h)
+                        y = int(center_y - int(max_h/2))
+                        h = int(center_y + int(max_h/2))
+
                 x = center_x - int(max_w/2)
                 w = center_x + int(max_w/2)
                 

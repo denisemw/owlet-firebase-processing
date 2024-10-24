@@ -41,7 +41,7 @@ if __name__ == '__main__':
 
     os.chdir(cwd)
 
-    subprocess.call(['python3', 'orca_8m_cropping.py', subject_name, str(subDate)])
+    subprocess.call(['python3', 'orca_4m_cropping.py', subject_name, str(subDate)])
     PATH_TO_DATA = '/Users/werchd01/Documents/ORCA_Subjects/'
     PATH_TO_OWLET = "/Users/werchd01/Documents/GitHub/OWLET/"
     PATH_TO_TASKS = "/Users/werchd01/Documents/GitHub/OWLET-preprocessing/ORCA_2.0_Tasks/"
