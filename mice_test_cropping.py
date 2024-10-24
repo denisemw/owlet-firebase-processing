@@ -268,6 +268,21 @@ if __name__ == '__main__':
                     max_w = int(1.7777*max_h)
                 y = int(center_y - int(max_h/2))
                 h = int(center_y + int(max_h/2))
+
+
+                #### alter if an adult's face is detected
+                if len(faces) > 1:
+                    startY_adult = faces[adult_index].top()
+                    endY_adult = faces[adult_index].bottom()
+                    face_h_adult = endY_adult - startY_adult
+                    center_y_adult = startY_adult + (face_h_adult / 2)
+                    if h > center_y_adult:
+                        max_h = center_y_adult
+                        max_w = int(1.7777*max_h)
+                        y = int(center_y - int(max_h/2))
+                        h = int(center_y + int(max_h/2))
+
+
                 x = center_x - int(max_w/2)
                 w = center_x + int(max_w/2)
                 
